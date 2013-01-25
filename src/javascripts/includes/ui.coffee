@@ -7,26 +7,32 @@ class UI
 
     @form.submit (event) =>
       event.preventDefault()
-      @doRequest @input.val()
+      @performQuery @input.val()
 
     @list.on 'click', =>
       @list.toggleClass('countdown')
 
-    # @input.focus()
-    @doRequest 'zurich hb'
+    @input.on 'keydown', =>
+      @input.removeClass 'error'
 
-  doRequest: (query) ->
-    request = new Request query
-    request.perform (schedule) => @scheduleLoaded(schedule)
+  performQuery: (query) ->
+    if @activeQuery?
+      @activeQuery.stop()
 
-  scheduleLoaded: (schedule) ->
-    if schedule
-      @input.val schedule.station
-      @input.blur()
-      console.dir schedule
-      @listDepartures schedule.departures
-    else
-      console.log 'not found'
+    @activeQuery = new Query \
+      query,
+      error: (=> @queryFailed()),
+      success: (=> @queryLoaded())
+    @activeQuery.start (departures) => @listDepartures(departures)
+
+  queryFailed: ->
+    @activeQuery = null
+    @input.select()
+    @input.addClass 'error'
+
+  queryLoaded: ->
+    @input.val @activeQuery.station
+    @input.select()
 
   listDepartures: (departures) ->
     @list.empty()
