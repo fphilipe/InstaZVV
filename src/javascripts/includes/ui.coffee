@@ -2,7 +2,7 @@ class UI
   constructor: ->
     @form = $('form')
     @input = $('input')
-    @list = $('ul')
+    @list = $('#departures-list')
     @filteredDirectionText = 'Zürich, '
 
     @form.submit (event) =>
@@ -16,7 +16,7 @@ class UI
       @input.removeClass 'error'
 
   performQuery: (query) ->
-    if @activeQuery?
+    if @activeQuery
       @activeQuery.stop()
 
     @activeQuery = new Query \
@@ -29,6 +29,7 @@ class UI
     @activeQuery = null
     @input.select()
     @input.addClass 'error'
+    @list.empty()
 
   queryLoaded: ->
     @input.val @activeQuery.station

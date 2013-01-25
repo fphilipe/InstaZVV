@@ -21,13 +21,13 @@ form input {
   }
 }
 
-ul {
+#departures-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-ul {
+#departures-list {
   background: #eee;
 
   &.empty::after {
@@ -37,7 +37,7 @@ ul {
   }
 }
 
-ul .line {
+#departures-list .line {
   position: absolute;
   left: 0;
   top: 0;
@@ -50,14 +50,14 @@ ul .line {
   background: white;
 }
 
-ul li {
+#departures-list li {
   height: 44px;
   position: relative;
   border-top: 2px solid #fff;
   border-bottom: 2px solid #ddd;
 }
 
-ul .direction, ul .status {
+#departures-list .direction, #departures-list .status {
   position: absolute;
   left: 0;
   right: 0;
@@ -71,15 +71,15 @@ ul .direction, ul .status {
   text-overflow: ellipsis;
 }
 
-ul .direction {
+#departures-list .direction {
   line-height: 44px;
 }
 
-ul .status ~ .direction {
+#departures-list .status ~ .direction {
   line-height: 26px;
 }
 
-ul .status {
+#departures-list .status {
   line-height: 18px;
   top: 22px;
   font-size: 14px;
@@ -87,32 +87,32 @@ ul .status {
   color: gray;
 }
 
-ul .time {
+#departures-list .time {
   position: absolute;
   right: 10px;
   font-weight: bold;
 }
 
-ul .time.delayed {
+#departures-list .time.delayed {
   color: red;
 }
 
-ul .countdown {
+#departures-list .countdown {
   position: absolute;
   right: 10px;
   display: none;
   font-weight: bold;
 }
 
-ul .countdown::before {
+#departures-list .countdown::before {
   content: "'";
 }
 
-ul.countdown .countdown {
+#departures-list.countdown .countdown {
   display: inline;
 }
 
-ul.countdown .time {
+#departures-list.countdown .time {
   display: none;
 }
 
