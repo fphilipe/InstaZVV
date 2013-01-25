@@ -1,4 +1,6 @@
 source :rubygems
 
-gem 'rb-fsevent'
-gem 'guard-coffeescript'
+gem 'coffee-script'
+gem 'sass'
+gem 'slim'
+gem 'sprockets'

@@ -1,38 +1,3 @@
-class Schedule
-  constructor: (data) ->
-    @station = data.stationName
-    @departures = (new Departure data for data in data.journey)
-
-class Departure
-  constructor: (data) ->
-    @scheduledTime = data.ti
-    @delayedTime = data.rt.dlt
-    @delay = parseInt(data.rt.dlm)
-    @countdown = parseInt(data.countdown_val)
-    @line = data.pr
-    @colors = ("##{color}" for color in data.lc.split ' ')  if data.lc
-    @status = data.rt.status
-    @direction = data.st
-    @actualTime = @delayedTime || @scheduledTime
-
-class Request
-  constructor: (@query) ->
-
-  perform: (callback) ->
-    @callback = callback
-    $.getScript @url(), => @requestLoaded()
-
-  url: ->
-    "http://online.fahrplan.zvv.ch/bin/stboard.exe/dn?L=vs_widgets&boardType=dep&maxJourneys=20&start=yes&monitor=0&requestType=0&timeFormat=cd&input=#{@query}"
-
-  requestLoaded: ->
-    data = journeysObj
-
-    if data and data.stationName != ''
-      @callback new Schedule data
-    else
-      @callback()
-
 class UI
   constructor: ->
     @form = $('form')
@@ -93,4 +58,3 @@ class UI
   filterDirectionText: (text) ->
     text.replace @filteredDirectionText, ''
 
-new UI
