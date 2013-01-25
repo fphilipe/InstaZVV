@@ -36,7 +36,11 @@ class UI
 
   listDepartures: (departures) ->
     @list.empty()
-    @list.append @listItemForDeparture departure for departure in departures
+    if departures.length > 0
+      @list.removeClass 'empty'
+      @list.append @listItemForDeparture departure for departure in departures
+    else
+      @list.addClass 'empty'
 
   listItemForDeparture: (departure) ->
     li = $('<li/>')

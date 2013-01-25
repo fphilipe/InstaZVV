@@ -29,6 +29,12 @@ ul {
 
 ul {
   background: #eee;
+
+  &.empty::after {
+    content: 'No Data Available';
+    display: block;
+    text-align: center;
+  }
 }
 
 ul .line {
