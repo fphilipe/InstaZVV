@@ -29,4 +29,16 @@ task :build => [:assets, :clean_assets] do
   `cp build/index-*.html build/index.html`
 end
 
+task :deploy => :build do
+  `git co gh-pages &&
+  for file in $(git ls-files); do rm "$file"; done &&
+  cp build/index.html . &&
+  cp build/*.{js,css} . &&
+  git add index.html *.{js,css} &&
+  git add -u &&
+  git commit -m "Deploy" &&
+  git push &&
+  git co master`
+end
+
 task :default => :build
