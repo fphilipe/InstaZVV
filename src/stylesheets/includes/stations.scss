@@ -1,0 +1,11 @@
+#stations-list {
+  @extend %reset-list;
+}
+
+.station {
+  @extend %overflow-ellipsis;
+
+  padding: 0 5%;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}

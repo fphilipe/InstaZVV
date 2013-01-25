@@ -1,0 +1,19 @@
+#search-container {
+  background: #ccc;
+  padding: $line-height / 2 5%;
+}
+
+#search-field {
+  width: 100%;
+  border: 1px solid black;
+  box-sizing: border-box;
+  font-size: inherit;
+  display: block;
+  height: $line-height;
+  text-align: center;
+  font-weight: inherit;
+
+  &.error {
+    color: red;
+  }
+}

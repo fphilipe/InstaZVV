@@ -45,7 +45,7 @@ class UI
       @list.addClass 'empty'
 
   listItemForDeparture: (departure) ->
-    li = $('<li/>')
+    li = $('<li/>').addClass('departure')
 
     @spanForListItem li, 'countdown', departure.countdown
     @spanForListItem li, 'status', departure.status  if departure.status

@@ -1,0 +1,88 @@
+#departures-list {
+  @extend %reset-list;
+
+  &.empty::after {
+    content: 'No Data Available';
+    display: block;
+    text-align: center;
+  }
+
+  &.countdown {
+    .countdown {
+      display: inline;
+    }
+
+    .time {
+      display: none;
+    }
+  }
+}
+
+.departure {
+  height: $line-height;
+  position: relative;
+  border-bottom: 1px solid #ccc;
+
+  &:nth-child(even) {
+    background: hsl(0, 0, 96%);
+  }
+
+  .line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: $line-height;
+    text-align: center;
+    font-weight: 500;
+    background: white;
+  }
+
+  .direction, .status {
+    @extend %overflow-ellipsis;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  .direction {
+    padding-left: $line-height + 0.75em;
+    padding-right: 3.5em;
+  }
+
+  .status ~ .direction {
+    top: -.5em;
+  }
+
+  .status {
+    $font-size-factor: 0.8;
+
+    font-size: 1em * $font-size-factor;
+    padding-left: ($line-height + 0.75em) / $font-size-factor;
+    padding-right: 3.5em / $font-size-factor;
+
+    font-style: italic;
+    color: gray;
+    top: .75em;
+  }
+
+  .time, .countdown {
+    position: absolute;
+    right: 0.5em;
+    font-weight: 500;
+  }
+
+  .time.delayed {
+    color: red;
+  }
+
+  .countdown {
+    display: none;
+
+    &::before {
+      content: "\2032";
+    }
+  }
+}

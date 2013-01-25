@@ -1,0 +1,5 @@
+@mixin desktop($breakpoint: 54em) {
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
