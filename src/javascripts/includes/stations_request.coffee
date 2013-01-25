@@ -17,6 +17,6 @@ class StationsRequest
   extractStationNames: (data=[]) ->
     i.value for i in data
 
-# The loaded script sets values on this object and call showSuggestion.
+# The loaded script sets values on this object and calls showSuggestion.
 SLs = showSuggestion: ->
 
