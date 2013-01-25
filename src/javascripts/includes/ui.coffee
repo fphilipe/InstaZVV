@@ -4,6 +4,7 @@ class UI
     @input = $('input')
     @list = $('#departures-list')
     @filteredDirectionText = 'Zürich, '
+    @stationsSuggester = new StationsSuggester
 
     @form.submit (event) =>
       event.preventDefault()
