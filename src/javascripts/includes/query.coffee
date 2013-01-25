@@ -10,7 +10,7 @@ class Query
     @requestSchedule()
 
   stop: ->
-    if @intervall
+    if @interval
       @stopRefreshing()
 
   requestSchedule: ->
