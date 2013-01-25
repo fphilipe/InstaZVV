@@ -14,7 +14,7 @@ class Query
       @stopRefreshing()
 
   requestSchedule: ->
-    request = new Request @query
+    request = new ScheduleRequest @query
     request.perform (schedule) => @scheduleLoaded(schedule)
 
   scheduleLoaded: (schedule) ->

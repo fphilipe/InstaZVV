@@ -1,8 +1,7 @@
-class Request
+class ScheduleRequest
   constructor: (@query) ->
 
-  perform: (callback) ->
-    @callback = callback
+  perform: (@callback) ->
     $.getScript @url(), => @requestLoaded()
 
   url: ->
