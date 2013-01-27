@@ -1,14 +1,15 @@
-class UI
+class App
   constructor: ->
     @form = $('form')
     @input = $('input')
     @list = $('#departures-list')
     @filteredDirectionText = 'Zürich, '
     @stationsSuggester = new StationsSuggester
+    @stateController = new StateController (state) => @stateChanged(state)
 
     @form.submit (event) =>
       event.preventDefault()
-      @performQuery @input.val()
+      @stateController.setState @input.val()
 
     @list.on 'click', =>
       @list.toggleClass('countdown')
@@ -16,7 +17,17 @@ class UI
     @input.on 'keydown', =>
       @input.removeClass 'error'
 
+  stateChanged: (state) ->
+    if state
+      @performQuery state
+    else
+      @reset()
+
   performQuery: (query) ->
+    if @activeQuery and @activeQuery.station == query
+      console.log 'abort'
+      return
+
     if @activeQuery
       @activeQuery.stop()
 
@@ -27,14 +38,18 @@ class UI
     @activeQuery.start (departures) => @listDepartures(departures)
 
   queryFailed: ->
+    @stateController.setState ''
+    @input.addClass 'error'
+
+  reset: ->
     @activeQuery = null
     @input.select()
-    @input.addClass 'error'
     @list.empty()
 
   queryLoaded: ->
     @input.val @activeQuery.station
     @input.select()
+    @stateController.setState @activeQuery.station
 
   listDepartures: (departures) ->
     @list.empty()

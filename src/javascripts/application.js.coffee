@@ -1,3 +1,3 @@
 #= require_tree ./includes
 
-new UI
+new App

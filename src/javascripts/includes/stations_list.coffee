@@ -10,7 +10,10 @@ class StationsList
       @container.append @stationItem i for i in stations
 
   stationItem: (station) ->
-    li = $('<li/>').addClass('station').text(station)
+    $('<li/>').addClass('station').append @stationLink station
+
+  stationLink: (station) ->
+    $('<a/>').attr('href', "##{HashUtil.encode(station)}").text(station)
 
   stationsDifferFromCurrentStations: (stations) ->
     if stations.length == @stations.length
