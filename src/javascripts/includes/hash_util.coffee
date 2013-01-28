@@ -1,6 +1,6 @@
 HashUtil =
   encode: (string) ->
-    string.replace(' ', '+')
+    encodeURI(string.replace(' ', '+'))
 
   decode: (string) ->
-    string.replace('+', ' ')
+    decodeURI(string.replace('+', ' '))
