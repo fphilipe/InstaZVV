@@ -6,12 +6,18 @@ class StateController
     @stateChanged()
 
   state: ->
-    HashUtil.decode(location.hash.replace('#', ''))
+    state = HashUtil.decode(location.hash.replace('#', ''))
+
+    if state.length > 0
+      state
 
   setState: (state) ->
     location.hash = HashUtil.encode(state)
 
   stateChanged: ->
-    @titleElement.text("#{@baseTitle} | #{@state()}")
+    @updateTitle()
     @callback @state()
+
+  updateTitle: ->
+    @titleElement.text [@baseTitle, @state()].filter((i) -> !!i).join(' | ')
 
