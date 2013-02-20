@@ -12,4 +12,8 @@
   a {
     display: block;
   }
+
+  &.selected {
+    background: hsl(217, 98%, 94%);
+  }
 }

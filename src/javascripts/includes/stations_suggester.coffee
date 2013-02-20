@@ -1,10 +1,10 @@
 class StationsSuggester
-  constructor: ->
-    @stationsList = new StationsList
-    @input = $('input')
+  constructor: (elements) ->
+    @stationsList = elements.stationsList
+    @searchField = elements.searchField
 
-    @input.on 'keyup', =>
-      @suggest(@input.val())
+    @searchField.on 'keyup', =>
+      @suggest(@searchField.val())
 
   suggest: (query) ->
     if @query != query

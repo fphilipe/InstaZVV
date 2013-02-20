@@ -4,7 +4,9 @@ class App
     @input = $('input')
     @list = $('#departures-list')
     @filteredDirectionText = 'Zürich, '
-    @stationsSuggester = new StationsSuggester
+    @stationsList = new StationsList
+    @stationsSuggester =
+      new StationsSuggester stationsList: @stationsList, searchField: @input
     @stateController = new StateController (state) => @stateChanged(state)
 
     @form.submit (event) =>
@@ -41,15 +43,16 @@ class App
     @stateController.setState ''
     @input.addClass 'error'
 
-  reset: ->
-    @activeQuery = null
-    @input.select()
-    @list.empty()
-
   queryLoaded: ->
     @input.val @activeQuery.station
     @input.select()
     @stateController.setState @activeQuery.station
+    @stationsList.hide()
+
+  reset: ->
+    @activeQuery = null
+    @input.select()
+    @list.empty()
 
   listDepartures: (departures) ->
     @list.empty()
